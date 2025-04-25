@@ -181,76 +181,80 @@ class BatchRenamer:
 
                         # rename the file name
                         if file_ext == filetypes:
-                            for filestring in strings_to_find:
-                                if filestring in filename_old:
-                                    self.logger.info(f'string to find : {filestring}')
-                                    self.logger.info("string to replace : ")
-                                    self.logger.info(f'{string_to_replace}')
 
-                                    if string_to_replace in filename_old:
-                                        self.logger.info("filetypes, replace match!")
-                                        self.logger.info("Strat the process!")
+                            if strings_to_find in filename_old:
+                                self.logger.info(f'string to find : {strings_to_find}')
+                                self.logger.info("string to replace : ")
+                                self.logger.info(f'{string_to_replace}')
 
-                                        name_new = filename_old.replace(
-                                            filename_old,
-                                            string_to_replace)
-                                        if prefix != "":
-                                            name_new = prefix + "_" + name_new
-                                        else:
-                                            self.logger.info("no prefix provide!")
-                                            pass
-                                        if suffix != "":
-                                            name_new = name_new + "_" + suffix
-                                        else:
-                                            self.logger.info("no suffix provide!")
-                                            pass
+                                if string_to_replace in filename_old:
+                                    self.logger.info("filetypes, replace match!")
+                                    self.logger.info("Strat the process!")
 
-                                        # print(f'New File Name : {name_new}')
-                                        self.logger.info(f'New File Name : {name_new}')
-
-                                        # get each file's full path,
-                                        # and reconstruct full path
-                                        name_new = name_new + file_ext
-                                        # check to see if we have new folder
-                                        if new_folder:
-                                            filename_fullpath = os.path.join(
-                                                new_folder, name_new)
-                                        else:
-                                            filename_fullpath = os.path.join(
-                                                filepath, name_new)
-                                        # print(f'Filepath : {filename_fullpath}')
-                                        target_path = filename_fullpath
-                                        source_path = os.path.join(filepath,
-                                                                   filename)
-                                        # print(f'Source Path : {source_path}')
-                                        # print(f'Target Path : {target_path}')
-
-                                        self.logger.info(f'Source Path : {source_path}')
-                                        self.logger.info(f'Target Path : {target_path}')
-                                        self.logger.info("************************")
-                                        # source_path = target_path #for testing
-
-                                        # final check to make sure target path
-                                        # and source path are not the same
-                                        if target_path != source_path:
-                                            # call modify file fuction
-                                            self.modify_file(source_path,
-                                                             target_path,
-                                                             new_folder,
-                                                             copy_mode=self.copy_files,
-                                                             force=self.overwrite)
-                                        else:
-                                            self.logger.warning(
-                                                "target_path, source_path are same")
-                                            self.logger.info("************************")
-                                            pass
+                                    name_new = filename_old.replace(
+                                        filename_old,
+                                        string_to_replace)
+                                    if prefix != "":
+                                        name_new = prefix + "_" + name_new
                                     else:
-                                        self.logger.info(
-                                            "filename and replace name no match!")
-                                        self.logger.info("************************")
+                                        self.logger.info("no prefix provide!")
                                         pass
+                                    if suffix != "":
+                                        name_new = name_new + "_" + suffix
+                                    else:
+                                        self.logger.info("no suffix provide!")
+                                        pass
+
+                                    # print(f'New File Name : {name_new}')
+                                    self.logger.info(f'New File Name : {name_new}')
+
+                                    # get each file's full path,
+                                    # and reconstruct full path
+                                    name_new = name_new + file_ext
+                                    # check to see if we have new folder
+                                    if new_folder:
+                                        filename_fullpath = os.path.join(
+                                            new_folder, name_new)
+                                    else:
+                                        filename_fullpath = os.path.join(
+                                            filepath, name_new)
+                                    # print(f'Filepath : {filename_fullpath}')
+                                    target_path = filename_fullpath
+                                    source_path = os.path.join(filepath,
+                                                               filename)
+                                    # print(f'Source Path : {source_path}')
+                                    # print(f'Target Path : {target_path}')
+
+                                    self.logger.info(f'Source Path : {source_path}')
+                                    self.logger.info(f'Target Path : {target_path}')
+                                    self.logger.info("************************")
+                                    # source_path = target_path #for testing
+
+                                    # final check to make sure target path
+                                    # and source path are not the same
+                                    if target_path != source_path:
+                                        # call modify file fuction
+                                        self.modify_file(source_path,
+                                                         target_path,
+                                                         new_folder,
+                                                         copy_files,
+                                                         overwrite)
+                                    else:
+                                        self.logger.warning(
+                                            "target_path, source_path are same")
+                                        self.logger.info("************************")
+                                        self.modify_file(source_path,
+                                                         target_path,
+                                                         new_folder,
+                                                         copy_files,
+                                                         overwrite)
                                 else:
+                                    self.logger.info(
+                                        "filename and replace name no match!")
+                                    self.logger.info("************************")
                                     pass
+                            else:
+                                pass
                         else:
                             # print("filetypes doesn't match!")
                             # print("************************")
@@ -306,8 +310,8 @@ class BatchRenamer:
                                     self.modify_file(source_path,
                                                      target_path,
                                                      new_folder,
-                                                     copy_mode=self.copy_files,
-                                                     force=self.overwrite)
+                                                     copy_files,
+                                                     overwrite)
                                 else:
                                     self.logger.warning(
                                         "target_path, source_path are same")

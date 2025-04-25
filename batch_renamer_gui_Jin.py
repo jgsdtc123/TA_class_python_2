@@ -94,7 +94,7 @@ class BatchRenamerWindow(QMainWindow, Ui_MainWindow):
         if self.new_folder != "":
             self.set_filepath(self.new_folder)
         else:
-            pass
+            self.set_filepath(self.filepath)
 
 
 if __name__ == '__main__':
