@@ -6,6 +6,7 @@ from PyQt6.QtCore import *
 # And convert it to a .py file using the MakeUIPy.bat file
 from batch_renamer_Jin_ui import Ui_MainWindow
 import batch_renamer_Jin
+# Add comment for testing
 
 class BatchRenamerWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
